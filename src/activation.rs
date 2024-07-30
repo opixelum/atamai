@@ -30,7 +30,6 @@ pub fn derivative(function: Activation, inputs: &Array1<f64>) -> Array1<f64> {
     }
 }
 
-// TODO: Check if this name exists
 struct Identity;
 impl Identity {
     fn activation(inputs: &Array1<f64>) -> Array1<f64> {
