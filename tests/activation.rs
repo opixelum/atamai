@@ -123,7 +123,7 @@ fn softmax_activation() {
 fn softmax_derivative() {
     let inputs: Array1<f64> = array![-2., -1., 0., 1., 2.];
     let outputs: Array1<f64> = derivative(Activation::Softmax, &inputs);
-    let expected_outputs: Array1<f64> = array![1., 1., 1., 1.];
+    let expected_outputs: Array1<f64> = array![1., 1., 1., 1., 1.];
     assert_eq!(outputs, expected_outputs);
 }
 
