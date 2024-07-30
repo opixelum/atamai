@@ -6,7 +6,6 @@ pub enum Activation {
     Logistic,
     Relu,
     Sigmoid,
-    Sign,
     Softmax,
     Tanh,
 }
@@ -16,7 +15,6 @@ pub fn activation(function: Activation, inputs: &Array1<f64>) -> Array1<f64> {
         Activation::Identity | Activation::Linear => Identity::activation(inputs),
         Activation::Logistic | Activation::Sigmoid => Logistic::activation(inputs),
         Activation::Relu => Relu::activation(inputs),
-        Activation::Sign => Sign::activation(inputs),
         Activation::Softmax => Softmax::activation(inputs),
         Activation::Tanh => Tanh::activation(inputs),
     }
@@ -27,7 +25,6 @@ pub fn derivative(function: Activation, inputs: &Array1<f64>) -> Array1<f64> {
         Activation::Identity | Activation::Linear => Identity::derivative(inputs),
         Activation::Logistic | Activation::Sigmoid => Logistic::derivative(inputs),
         Activation::Relu => Relu::derivative(inputs),
-        Activation::Sign => Sign::derivative(inputs),
         Activation::Softmax => Softmax::derivative(inputs),
         Activation::Tanh => Tanh::derivative(inputs),
     }
@@ -64,18 +61,6 @@ impl Relu {
 
     fn derivative(inputs: &Array1<f64>) -> Array1<f64> {
         inputs.mapv(|x| if x > 0.0 { 1.0 } else { 0.0 })
-    }
-}
-
-struct Sign;
-impl Sign {
-    fn activation(inputs: &Array1<f64>) -> Array1<f64> {
-        inputs.mapv(|x| if x >= 0.0 { 1.0 } else { -1.0 })
-    }
-
-    // TODO: Check if this is the correct derivative
-    fn derivative(inputs: &Array1<f64>) -> Array1<f64> {
-        Array1::zeros(inputs.raw_dim())
     }
 }
 

@@ -106,22 +106,6 @@ fn sigmoid_derivative() {
 }
 
 #[test]
-fn sign_activation() {
-    let inputs: Array1<f64> = array![-2., -1., 0., 1., 2.];
-    let outputs: Array1<f64> = activation(Activation::Sign, &inputs);
-    let expected_outputs: Array1<f64> = array![-1., -1., 1., 1., 1.];
-    assert_eq!(outputs, expected_outputs);
-}
-
-#[test]
-fn sign_derivative() {
-    let inputs: Array1<f64> = array![-2., -1., 0., 1., 2.];
-    let outputs: Array1<f64> = derivative(Activation::Sign, &inputs);
-    let expected_outputs: Array1<f64> = array![0., 0., 0., 0., 0.];
-    assert_eq!(outputs, expected_outputs);
-}
-
-#[test]
 fn softmax_activation() {
     let inputs: Array1<f64> = array![-2., -1., 0., 1., 2.];
     let outputs: Array1<f64> = activation(Activation::Softmax, &inputs);
@@ -136,7 +120,12 @@ fn softmax_activation() {
 }
 
 #[test]
-fn softmax_derivative() {}
+fn softmax_derivative() {
+    let inputs: Array1<f64> = array![-2., -1., 0., 1., 2.];
+    let outputs: Array1<f64> = derivative(Activation::Softmax, &inputs);
+    let expected_outputs: Array1<f64> = array![1., 1., 1., 1.];
+    assert_eq!(outputs, expected_outputs);
+}
 
 #[test]
 fn tanh_activation() {
