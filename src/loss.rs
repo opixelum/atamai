@@ -18,7 +18,7 @@ pub fn loss(loss: Loss, predictions: Array1<f64>, targets: Array1<f64>) -> f64 {
         Loss::HingeLoss => 0.,
         Loss::HuberLoss => 0.,
         Loss::MeanAbsoluteError => mean_absolute_error(predictions, targets),
-        Loss::MeanSquaredError => 0.,
+        Loss::MeanSquaredError => mean_squared_error(predictions, targets),
     }
 }
 
@@ -51,4 +51,10 @@ fn mean_absolute_error(predictions: Array1<f64>, targets: Array1<f64>) -> f64 {
     sum / predictions.len() as f64
 }
 
-// fn mean_squared_error(predictions: Array1<f64>, targets: Array1<f64>) -> f64 {}
+fn mean_squared_error(predictions: Array1<f64>, targets: Array1<f64>) -> f64 {
+    let mut sum: f64 = 0.;
+    for (i, prediction) in predictions.iter().enumerate() {
+        sum += (prediction - targets[i]).powi(2);
+    }
+    sum / predictions.len() as f64
+}

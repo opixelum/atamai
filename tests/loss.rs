@@ -33,3 +33,18 @@ fn mean_absolute_error() {
     expected_loss = 1.6;
     assert_eq!(loss, expected_loss);
 }
+
+#[test]
+fn mean_squared_error() {
+    let mut predictions: Array1<f64> = array![0.];
+    let mut targets: Array1<f64> = array![0.];
+    let mut loss: f64 = loss::loss(MeanSquaredError, predictions, targets);
+    let mut expected_loss: f64 = 0.;
+    assert_eq!(loss, expected_loss);
+
+    predictions = array![12., 18., 32., 38., 48.];
+    targets = array![10., 20., 30., 40., 50.];
+    loss = loss::loss(MeanSquaredError, predictions, targets);
+    expected_loss = 4.;
+    assert_eq!(loss, expected_loss);
+}
