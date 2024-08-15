@@ -7,4 +7,4 @@ edition = "2021"
 opt-level = 3
 
 [dependencies]
-ndarray = "0.15.6"
+ndarray = "0.16.1"
