@@ -4,15 +4,18 @@ const EPSILON: f64 = f64::MIN_POSITIVE;
 
 pub enum Loss {
     BinaryCrossEntropy,
+    L1,
+    L2,
+    LogLoss,
     MeanAbsoluteError,
     MeanSquaredError,
 }
 
 pub fn loss(loss: Loss, targets: Array2<f64>, predictions: Array2<f64>) -> f64 {
     match loss {
-        Loss::BinaryCrossEntropy => binary_cross_entropy(targets, predictions),
-        Loss::MeanAbsoluteError => mean_absolute_error(targets, predictions),
-        Loss::MeanSquaredError => mean_squared_error(targets, predictions),
+        Loss::BinaryCrossEntropy | Loss::LogLoss => binary_cross_entropy(targets, predictions),
+        Loss::MeanAbsoluteError | Loss::L1 => mean_absolute_error(targets, predictions),
+        Loss::MeanSquaredError | Loss::L2 => mean_squared_error(targets, predictions),
     }
 }
 
